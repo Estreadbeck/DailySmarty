@@ -36,7 +36,9 @@ class TopicsController < ApplicationController
   private
 
     def topic_params
-      params.require(:topic).permit(:title)
+      params.require(:topic).permit(:title,
+                                    posts_attributes: [:id, :title, :content, :topic_id]
+                                    )
     end
 
     def set_topic

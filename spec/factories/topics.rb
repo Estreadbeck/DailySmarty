@@ -1,5 +1,11 @@
 FactoryBot.define do
   factory :topic do
-    title { "MyString" }
+    title { "Dungeons" }
+    slug { "dungeons" }
+  end
+
+  factory :second_topic, class: 'Topic' do
+    title { "Dragons" }
+    slug { "dragons" }
   end
 end

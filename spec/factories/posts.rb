@@ -1,8 +1,15 @@
 FactoryBot.define do
   factory :post do
-    title { "MyString" }
-    content { "MyText" }
-    user { nil }
-    topic { nil }
+    title { "My Great Post" }
+    content { "Amazing Content" }
+    user {}
+    topic {}
+  end
+
+  factory :second_post, class: 'Post' do
+    title { "Another Guide" }
+    content { "Killer post" }
+    user {}
+    topic {}
   end
 end

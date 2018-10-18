@@ -3,29 +3,27 @@ require 'rails_helper'
 describe 'navigation' do 
   describe 'index' do
     before do
-      @topic = Topic.create(title: "Whatever")
+      @topic = FactoryBot.build_stubbed(:topic)
+      @topic2 = FactoryBot.build_stubbed(:second_topic)
+      visit topics_path
     end
 
     it 'can be reached successfully' do
-      visit topics_path
       expect(page.status_code).to eq(200)
     end
 
     it 'renders the list of topics' do
-      Topic.create(title: "Coding")
-      visit topics_path
-      expect(page).to have_content(/Sports|Coding/)
+      expect(page).to have_content(/Dungeons|Dragons/)
     end
 
     it 'each topic links to its show page' do
-      visit topics_path
-      expect(page).to have_link(@topic.title, href: topic_path(@topic))
+      expect(page).to have_link(@topic.title, href: topic_post_path(@topic))
     end
   end
 
   describe 'show' do
     before do
-      @topic = Topic.create(title: "Sports")
+      @topic = FactoryBot.build_stubbed(:topic)
       visit topic_path(@topic)
     end
 
@@ -34,11 +32,11 @@ describe 'navigation' do
     end
 
     it 'should display the topic title' do
-      expect(page).to have_css('h1', text: 'Sports')
+      expect(page).to have_css('h1', text: "#{@topic.title}")
     end
 
     it 'should have a url that matches the custom url slug' do
-      expect(current_path).to have_content('sports')
+      expect(current_path).to have_content("#{@topic.slug}")
     end
   end
 
@@ -59,7 +57,7 @@ describe 'navigation' do
 
   describe 'edit' do
     before do
-      @topic = Topic.create(title: "Vermintide")
+      @topic = FactoryBot.build_stubbed(:topic)
       visit edit_topic_path(@topic)
     end
 
