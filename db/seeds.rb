@@ -41,3 +41,14 @@ User.create!(
 )
 
 puts "Student user created"
+
+50.times do |post|
+  Post.create!(
+    title: "#{Faker::FunnyName.unique.name}",
+    content: "#{Faker::MichaelScott.quote}",
+    topic_id: Topic.last.id,
+    user_id: User.last.id
+    )
+end
+
+puts "50 posts were created"
